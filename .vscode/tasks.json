@@ -1,0 +1,164 @@
+{
+  "version": "2.0.0",
+  "runner": "terminal",
+  "type": "shell",
+  "echoCommand": true,
+  "presentation": { "reveal": "always" },
+  "tasks": [
+    //C++ 컴파일
+    {
+      "label": "Compile Debug",
+      "command": "g++",
+      "args": [
+        "-c",
+        "src/*.cpp",
+        "-std=c++14",
+        "-g",
+        "-Wall",
+        "-m64",
+        "-I",
+        "include",
+        "-I",
+        "D:/Library/SDL2-w64/include"
+      ],
+      "group": "build",
+
+      //컴파일시 에러를 편집기에 반영
+      //참고:   https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher
+
+      "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceRoot}"],
+        "pattern": {
+          // The regular expression.
+          //Example to match: helloWorld.c:5:3: warning: implicit declaration of function 'prinft'
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "Linking Debug",
+      "command": "g++",
+      "args": [
+        "*.o",
+        "-o",
+        "bin/debug/main",
+        "-L",
+        "D:/Library/SDL2-w64/lib",
+        "-lmingw32",
+        "-lSDL2main",
+        "-lSDL2",
+        "-lSDL2_image"
+      ],
+      "group": "build",
+
+      //컴파일시 에러를 편집기에 반영
+      //참고:   https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher
+
+      "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceRoot}"],
+        "pattern": {
+          // The regular expression.
+          //Example to match: helloWorld.c:5:3: warning: implicit declaration of function 'prinft'
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "Compile Release",
+      "command": "g++",
+      "args": [
+        "-c",
+        "src/*.cpp",
+        "-std=c++14",
+        "-O3",
+        "-Wall",
+        "-m64",
+        "-I",
+        "include",
+        "-I",
+        "D:/Library/SDL2-w64/include"
+      ],
+      "group": "build",
+
+      //컴파일시 에러를 편집기에 반영
+      //참고:   https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher
+
+      "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceRoot}"],
+        "pattern": {
+          // The regular expression.
+          //Example to match: helloWorld.c:5:3: warning: implicit declaration of function 'prinft'
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "Linking Release",
+      "command": "g++",
+      "args": [
+        "*.o",
+        "-o",
+        "bin/release/main",
+        "-s",
+        "-L",
+        "D:/Library/SDL2-w64/lib",
+        "-lmingw32",
+        "-lSDL2main",
+        "-lSDL2",
+        "-lSDL2_image"
+      ],
+      "group": "build",
+
+      //컴파일시 에러를 편집기에 반영
+      //참고:   https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher
+
+      "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceRoot}"],
+        "pattern": {
+          // The regular expression.
+          //Example to match: helloWorld.c:5:3: warning: implicit declaration of function 'prinft'
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    // 바이너리 실행(Ubuntu)
+    // {
+    //     "label": "execute",
+    //     "command": "${fileDirname}/${fileBasenameNoExtension}",
+    //     "group": "test"
+    // }
+    // 바이너리 실행(Windows)
+    {
+      "label": "Execute Debug",
+      "command": "cmd",
+      "group": "test",
+      "args": ["/C", "bin\\debug\\main.exe"]
+    },
+    {
+      "label": "Execute Release",
+      "command": "cmd",
+      "group": "test",
+      "args": ["/C", "bin\\release\\main.exe"]
+    }
+  ]
+}
