@@ -2,8 +2,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-Entity::Entity(float p_x, float p_y, SDL_Texture *p_tex)
-    : x(p_x), y(p_y), tex(p_tex)
+Entity::Entity(Vector2f p_pos, SDL_Texture *p_tex)
+    : pos(p_pos), tex(p_tex)
 // Member initialization list
 {
     currentFrame.x = 0;
@@ -12,14 +12,9 @@ Entity::Entity(float p_x, float p_y, SDL_Texture *p_tex)
     currentFrame.h = 32;
 }
 
-float Entity::getX()
+Vector2f &Entity::getPos()
 {
-    return x;
-}
-
-float Entity::getY()
-{
-    return y;
+    return pos;
 }
 
 SDL_Texture *Entity::getTex()
