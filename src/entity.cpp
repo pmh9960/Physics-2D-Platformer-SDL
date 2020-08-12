@@ -26,3 +26,26 @@ SDL_Rect Entity::getCurrentFrame()
 {
     return currentFrame;
 }
+
+void Entity::Move(Dir dir)
+{
+
+    switch (dir)
+    {
+    case Up:
+        pos.y -= 1;
+        break;
+    case Down:
+        pos.y += 1;
+        break;
+    case Left:
+        pos.x -= 1;
+        break;
+    case Right:
+        pos.x += 1;
+        break;
+    default:
+        std::cout << "Error : Direction is not the four ways" << std::endl;
+        break;
+    }
+}
