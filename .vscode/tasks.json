@@ -144,8 +144,14 @@
     {
       "label": "Debug one que",
       "group": "build",
-      "command": "powershell",
-      "args": ["-Command", "./command.bat"]
+      "windows": {
+        "command": "powershell",
+        "args": ["-Command", "./command.bat"]
+      },
+      "osx": {
+        "command": "zsh",
+        "args": ["-C", "./command.sh"]
+      }
     },
     // 바이너리 실행(Ubuntu)
     // {
