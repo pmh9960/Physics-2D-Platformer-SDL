@@ -7,18 +7,11 @@
 class Entity
 {
 public:
-    enum Dir
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    };
     Entity(Vector2f p_pos, SDL_Texture *p_tex);
     Vector2f &getPos();
     SDL_Texture *getTex();
     SDL_Rect getCurrentFrame();
-    void Move(Dir dir);
+    void Move(int xa, int ya);
 
 private:
     Vector2f pos;

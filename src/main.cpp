@@ -5,6 +5,7 @@
 
 #include "RenderWindow.hpp"
 #include "Entity.hpp"
+#include "Map.hpp"
 
 int main(int argc, char *args[])
 {
@@ -19,7 +20,8 @@ int main(int argc, char *args[])
     if (!(IMG_Init(IMG_INIT_PNG)))
         std::cout << "HEY... IMG INIT HAS FAILED. IMG_ERROR: " << SDL_GetError() << std::endl;
 
-    RenderWindow window("GAME v1.0", 1280, 720);
+    RenderWindow window("GAME v1.0", 800, 640); // 32-pixel = 1 block
+                                                // 25 X 20
 
     SDL_Texture *grassTexture = window.loadTexture("res/gfx/ground_grass_1.png");
     std::vector<Entity> entities = {Entity(Vector2f(30, 0), grassTexture),
@@ -38,6 +40,8 @@ int main(int argc, char *args[])
     bool gameRunning = true;
     SDL_Event event;
 
+    Map map(&window);
+
     while (gameRunning)
     {
         // Measure cycle time
@@ -49,6 +53,7 @@ int main(int argc, char *args[])
                 gameRunning = false;
         }
         window.clear();
+        map.DrawMap();
         for (Entity &e : entities)
         {
             window.render(e);
@@ -60,8 +65,8 @@ int main(int argc, char *args[])
         window.display();
 
         // Move 1 pixel at every frame.
-        zolamens[0].Move(Entity::Up);
-        zolamens[1].Move(Entity::Left);
+        zolamens[0].Move(1, 1);
+        zolamens[1].Move(1, 1);
 
         frameTime = SDL_GetTicks() - frameStart;
         if (frameDelay > frameTime)
